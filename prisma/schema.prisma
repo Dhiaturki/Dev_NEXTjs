@@ -1,0 +1,20 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         String   @default("ETUDIANT") // ADMIN, ENSEIGNANT, ETUDIANT
+  filiere      String?  @default("Informatique")
+  note         Float?   @default(14)
+  createdAt    DateTime @default(now())
+}
